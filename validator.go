@@ -2,7 +2,6 @@ package duration
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 )
@@ -135,7 +134,6 @@ func isValidMonth(mm string) bool {
 func isValidDatePart(part string, lowerLimit, upperLimit int) bool {
 	number, err := getNumericDatePart(part)
 	if err != nil {
-		log.Println(err)
 		return false
 	}
 
