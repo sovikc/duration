@@ -26,6 +26,7 @@ var (
 	incorrectDateFormatErrMessage = "%s Date format is incorrect"
 	incorrectDateRangeErrMessage  = "%s Date is not within acceptable range"
 	incorrectDateErrMessage       = "%s Date is not a valid date"
+	emptyDateErrMessage           = "%s Date is empty"
 )
 
 // Gregorian calendar consists of 12 months
@@ -35,6 +36,11 @@ var (
 )
 
 func isValidFormat(date, label string) (bool, error) {
+
+	if isEmpty(date) {
+		return false, fmt.Errorf(getErrorMessage(emptyDateErrMessage, label))
+	}
+
 	parts := getParts(date)
 
 	if !hasThreeValidDateParts(parts) {
@@ -63,6 +69,10 @@ func isValidFormat(date, label string) (bool, error) {
 
 	return true, nil
 
+}
+
+func isEmpty(date string) bool {
+	return len(strings.Trim(date, " ")) == 0
 }
 
 func getErrorMessage(message, label string) string {
