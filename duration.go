@@ -129,28 +129,25 @@ func getJulianDay(dd, mm, yyyy int) int {
 	// This is because a is 1 for January and February and 0 for the other months.
 	// The effect of the combined calculation of y and m is to pretend that the year begins in March and ends in February.
 
-	/*
-		  dd =  Adding day, the day of the month. Each increment to day increments the number of days since a fixed day.
+	// dd =  Adding day, the day of the month. Each increment to day increments the number of days since a fixed day.
 
-			(153*m+2)/5 =
-			The integer division (153m+ 2)/5 is a cleverly designed expression to calculate the number of days
-			in the previous months (where March corresponds to m=0)
+	// (153*m+2)/5 =
+	// The integer division (153m+ 2)/5 is a cleverly designed expression to calculate the number of days
+	// in the previous months (where March corresponds to m=0)
 
-			For example, June corresponds to a value of 3 for m.
-			For this value of m, the expression results in a value of 461/5 = 92 using integer division,
-			which are the total number of days in March, April, and May
+	// For example, June corresponds to a value of 3 for m.
+	// For this value of m, the expression results in a value of 461/5 = 92 using integer division,
+	// which are the total number of days in March, April, and May
 
-		  y*365 = Each non-leap-year has 365 days
+	// y*365 = Each non-leap-year has 365 days
 
-			y/4 - y/100 + y/400 =
-			Calculates the number of leap years since the year -4800 (which corresponds to a value of 0 for y).
-			There is a leap year every year that is divisible by 4, except for years that are divisible by 100, but not divisible by 400.
-			The number of leap years is, of course, the same as the number of leap days that need to be added in.
+	// y/4 - y/100 + y/400 =
+	// Calculates the number of leap years since the year -4800 (which corresponds to a value of 0 for y).
+	// There is a leap year every year that is divisible by 4, except for years that are divisible by 100, but not divisible by 400.
+	// The number of leap years is, of course, the same as the number of leap days that need to be added in.
 
-			-32045 =
-			Ensures that the result will be 0 for January 1, 4713 BCE.
-
-	*/
+	// -32045 =
+	// Ensures that the result will be 0 for January 1, 4713 BCE.
 
 	return dd + (153*m+2)/5 + y*365 + y/4 - y/100 + y/400 - 32045
 }
